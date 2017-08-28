@@ -1,6 +1,7 @@
 package com;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,13 +15,20 @@ public class WordCounter {
 	
 	public static void main(String[] args){
 		try {
-			Map<String,String> wordListMap = getWordLineOccurence("resource/test.txt");
+			if(args.length==0){
+				System.out.println("Please enter file location");
+				return;
+			}
+			Map<String,String> wordListMap = getWordLineOccurence(args[0]);
             for(String key:wordListMap.keySet()){
             	StringBuffer sb = new StringBuffer(key).append("=").append(wordListMap.get(key));
             	System.out.println(sb.toString());
             }
-	    } catch (Exception e) {
-            e.printStackTrace();
+	    } catch(FileNotFoundException fe){
+	    	System.out.println("Please enter valid file location");
+	    }catch (Exception e) {
+	    	System.out.println("Exception occured processing file"+e.getMessage());
+            //e.printStackTrace();
         }
 
 	}
