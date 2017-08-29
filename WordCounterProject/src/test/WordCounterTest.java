@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 
@@ -23,5 +24,11 @@ public class WordCounterTest {
 			e.printStackTrace();
 		}
 	}
+	@Test(expected=FileNotFoundException.class)
+	public void testFileNotFound() throws FileNotFoundException, IOException {
+		Map<String,String> wordCounterMap = WordCounter.getWordLineOccurence("resource");
+	}
+
+	
 
 }
